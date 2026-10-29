@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moda · UDS Sebrae RN</title>
+<meta name="description" content="Setor Moda na Unidade de Desenvolvimento Setorial do Sebrae RN.">
+<link rel="icon" href="../assets/img/logo-sebrae-branca.png">
+<link rel="stylesheet" href="../assets/fontes/archivo.css">
+<style>
+body{margin:0;font-family:'Archivo',sans-serif;background:#0A0F2C;color:#0A0F2C}
+a{color:inherit}
+.dots{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(170,190,255,.55) 1.1px,transparent 1.7px),radial-gradient(circle,rgba(150,120,255,.35) 1px,transparent 1.6px);background-size:12px 12px,17px 17px;background-position:0 0,6px 9px;-webkit-mask-image:radial-gradient(ellipse 70% 85% at 78% 30%,#000 0%,rgba(0,0,0,.55) 40%,transparent 75%);mask-image:radial-gradient(ellipse 70% 85% at 78% 30%,#000 0%,rgba(0,0,0,.55) 40%,transparent 75%)}
+.dots-sm{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(170,190,255,.35) 1px,transparent 1.6px);background-size:14px 14px;-webkit-mask-image:linear-gradient(110deg,transparent 30%,#000 100%);mask-image:linear-gradient(110deg,transparent 30%,#000 100%)}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.marquee-lento{display:flex;width:max-content;animation:rolar 50s linear infinite}
+.faixa:hover .marquee-lento{animation-play-state:paused}
+@keyframes rolar{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.marquee-lento{animation:none}}
+.nav-links{display:flex}
+.nav-toggle{display:none}
+@media (max-width: 900px){.nav-links{display:none}.nav-toggle{display:inline-flex}}
+.lk:hover{color:#FFFFFF}
+.btn-claro:hover{background:#DCE4FF}
+.trilho{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.prog:hover{transform:translateY(-4px)}
+.prog{transition:transform .25s ease}
+button:focus-visible,a:focus-visible{outline:3px solid #8EA8FF;outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<template id="pagina">
+<div id="topo" style="background: #F3EFE7; font-family: 'Archivo', sans-serif; font-size: 17px; line-height: 1.55; color: #0A0F2C">
+
+<section style="position: relative; overflow: hidden; background: #0A0F2C; color: #FFFFFF">
+<div class="glow" style="width: 600px; height: 600px; right: -100px; top: -140px; background: #2B4BFF; opacity: 0.32"></div>
+<div class="glow" style="width: 480px; height: 480px; left: 30%; top: 260px; background: #6A3DE8; opacity: 0.25"></div>
+<div class="dots"></div>
+
+<div style="position: sticky; top: 0; z-index: 20; padding: 18px clamp(12px, 3vw, 32px) 0">
+<header style="max-width: 1240px; margin: 0 auto; background: rgba(12, 18, 52, 0.82); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 999px; padding: 8px 8px 8px 22px; display: flex; align-items: center; gap: 24px">
+<a href="../index.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none; min-height: 44px; color: #FFFFFF">
+<img src="../assets/img/logo-sebrae-branca.png" alt="Sebrae" style="height: 30px; width: auto">
+<span style="width: 1px; height: 26px; background: rgba(255, 255, 255, 0.35)"></span>
+<span style="font-stretch: 112%; font-weight: 800; font-size: 20px; letter-spacing: 0.02em">UDS</span>
+</a>
+<nav aria-label="Nesta página" class="nav-links" style="align-items: center; gap: 4px; margin-left: auto">
+<a href="../index.html" class="lk" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none; color: #C9D3FF; font-weight: 500; font-size: 15px">Início</a>
+<a href="#programas" class="lk" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none; color: #C9D3FF; font-weight: 500; font-size: 15px">Programas</a>
+<a href="#jornadas" class="lk" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none; color: #C9D3FF; font-weight: 500; font-size: 15px">Jornadas</a>
+<a href="#agenda" class="lk" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none; color: #C9D3FF; font-weight: 500; font-size: 15px">Agenda</a>
+<a href="#consultorias" class="lk" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none; color: #C9D3FF; font-weight: 500; font-size: 15px">Consultorias</a>
+</nav>
+<a href="#contato" class="btn-claro nav-links" style="align-items: center; min-height: 44px; padding: 0 22px; border-radius: 999px; background: #FFFFFF; color: #0A0F2C; text-decoration: none; font-weight: 700; font-size: 15px">Fale com a gente</a>
+<button type="button" class="nav-toggle" onClick="{{alternarMenu}}" aria-expanded="{{menuAberto}}" style="margin-left: auto; align-items: center; min-height: 44px; padding: 0 18px; border: none; border-radius: 999px; background: #FFFFFF; color: #0A0F2C; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer">{{rotuloMenu}}</button>
+</header>
+<sc-if value="{{menuAberto}}" hint-placeholder-val="{{ false }}">
+<div style="max-width: 1240px; margin: 10px auto 0; background: #FFFFFF; color: #0A0F2C; border-radius: 22px; padding: 12px; box-shadow: 0 24px 60px rgba(5, 8, 30, 0.45); display: flex; flex-direction: column">
+<a href="../index.html" style="min-height: 48px; display: flex; align-items: center; padding: 0 14px; text-decoration: none; font-weight: 600">Início</a>
+<a href="#programas" onClick="{{fecharMenu}}" style="min-height: 48px; display: flex; align-items: center; padding: 0 14px; text-decoration: none; font-weight: 600">Programas</a>
+<a href="#jornadas" onClick="{{fecharMenu}}" style="min-height: 48px; display: flex; align-items: center; padding: 0 14px; text-decoration: none; font-weight: 600">Jornadas</a>
+<a href="#agenda" onClick="{{fecharMenu}}" style="min-height: 48px; display: flex; align-items: center; padding: 0 14px; text-decoration: none; font-weight: 600">Agenda</a>
+<a href="#consultorias" onClick="{{fecharMenu}}" style="min-height: 48px; display: flex; align-items: center; padding: 0 14px; text-decoration: none; font-weight: 600">Consultorias</a>
+<a href="#contato" onClick="{{fecharMenu}}" style="min-height: 48px; display: flex; align-items: center; justify-content: center; margin-top: 6px; border-radius: 999px; background: #0A0F2C; color: #FFFFFF; text-decoration: none; font-weight: 700">Fale com a gente</a>
+</div>
+</sc-if>
+</div>
+
+<div style="position: relative; max-width: 1240px; margin: 0 auto; padding: clamp(56px, 9vw, 112px) clamp(16px, 4vw, 40px) clamp(56px, 7vw, 88px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 48px 64px">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<a href="../index.html#gestores" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 36px; font-size: 14px; color: #C9D3FF; text-decoration: none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg>Todos os setores</a>
+<h1 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(48px, 7.4vw, 104px); line-height: 0.95; letter-spacing: -0.035em">{{s.titulo.0}} <em style="font-style: italic; color: #8EA8FF">{{s.titulo.1}}</em></h1>
+<p style="margin: 0; max-width: 540px; font-size: clamp(18px, 1.6vw, 21px); color: #C9D3FF">{{s.subtitulo}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{s.segmentos}}" as="sg"><span style="padding: 8px 16px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 999px; font-size: 15px; font-weight: 600">{{sg}}</span></sc-for>
+</div>
+</div>
+<aside style="flex: 1 1 340px; min-width: 0; max-width: 420px; position: relative">
+<div style="position: relative; border-radius: 30px; overflow: hidden; background: #1B1150; padding: 28px; display: flex; flex-direction: column; gap: 20px; border: 1px solid rgba(255, 255, 255, 0.12)">
+<div style="display: flex; align-items: center; gap: 18px">
+<span style="flex: none; width: 116px; height: 116px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 6px rgba(142, 168, 255, 0.22)"><img data-dc-src="{{fotoGestor}}" alt="Foto de {{s.gestor.nome}}" style="width: 100%; height: 100%; object-fit: cover; transform: scale(1.24)"></span>
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 14px; color: #8EA8FF; font-weight: 700">{{s.gestor.rotulo}}</span>
+<span style="font-stretch: 112%; font-weight: 800; font-size: 28px; line-height: 1.05">{{s.gestor.nome}}</span>
+</div>
+</div>
+<p style="margin: 0; font-size: 15px; color: #C9D3FF">{{bio}}</p>
+</div>
+</aside>
+</div>
+
+<div style="position: relative; border-top: 1px solid rgba(255, 255, 255, 0.12)">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); box-sizing: border-box; display: flex; flex-wrap: wrap">
+<div style="flex: 1 1 180px; padding: 24px 20px 28px 0; display: flex; flex-direction: column"><span style="font-stretch: 112%; font-weight: 800; font-size: 44px; line-height: 1">{{n0}}</span><span style="font-size: 14px; color: #B8C2EC">programas</span></div>
+<div style="flex: 1 1 180px; padding: 24px 20px 28px; border-left: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column"><span style="font-stretch: 112%; font-weight: 800; font-size: 44px; line-height: 1">{{n1}}</span><span style="font-size: 14px; color: #B8C2EC">jornadas de capacitação</span></div>
+<div style="flex: 1 1 180px; padding: 24px 20px 28px; border-left: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column"><span style="font-stretch: 112%; font-weight: 800; font-size: 44px; line-height: 1">{{n2}}</span><span style="font-size: 14px; color: #B8C2EC">feiras e missões em 2026</span></div>
+<div style="flex: 1 1 180px; padding: 24px 0 28px 20px; border-left: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-direction: column"><span style="font-stretch: 112%; font-weight: 800; font-size: 44px; line-height: 1">{{n3}}</span><span style="font-size: 14px; color: #B8C2EC">frentes de consultoria</span></div>
+</div>
+</div>
+</section>
+
+<section id="programas" style="max-width: 1240px; margin: 0 auto; padding: clamp(72px, 10vw, 120px) clamp(16px, 4vw, 40px); box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 36px">
+<div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #1F4FD1"><span style="width: 22px; height: 2px; background: #1F4FD1"></span>Programas</p>
+<h2 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.03em">{{tituloProg.0}} <em style="font-style: italic; color: #1F4FD1">{{tituloProg.1}}</em></h2>
+</div>
+<div style="display: flex; gap: 10px">
+<button type="button" onClick="{{progAnterior}}" aria-label="Programa anterior" style="width: 52px; height: 52px; border-radius: 50%; border: 1px solid #0A0F2C; background: transparent; color: #0A0F2C; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: {{opProgAnt}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="M11 6l-6 6 6 6"></path></svg></button>
+<button type="button" onClick="{{progProximo}}" aria-label="Próximo programa" style="width: 52px; height: 52px; border-radius: 50%; border: none; background: #0A0F2C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: {{opProgProx}}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></button>
+</div>
+</div>
+<div style="overflow: hidden; padding: 6px 0">
+<div class="trilho" style="display: flex; gap: 16px; transform: translateX(-{{progDesloc}}px)">
+<sc-for list="{{programas}}" as="p" hint-placeholder-count="5">
+<article class="prog" style="flex: 0 0 340px; min-height: 300px; position: relative; overflow: hidden; border-radius: 26px; background: {{p.fundo}}; color: #FFFFFF; padding: 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+<div class="dots-sm" style="opacity: 0.55"></div>
+<span style="position: relative; font-stretch: 112%; font-weight: 700; font-size: 15px; color: #8EA8FF">{{p.num}}</span>
+<h3 style="position: relative; margin: 0; font-stretch: 112%; font-weight: 800; font-size: 28px; line-height: 1.08; letter-spacing: -0.015em">{{p.nome}}</h3>
+<div style="position: relative; margin-top: auto; display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{p.itens}}" as="it" hint-placeholder-count="4">
+<span style="padding: 5px 12px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); font-size: 13px; font-weight: 600">{{it}}</span>
+</sc-for>
+</div>
+</article>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="jornadas" style="position: relative; overflow: hidden; background: #0A0F2C; color: #FFFFFF; margin: 0 clamp(0px, 1.5vw, 20px); border-radius: clamp(0px, 2vw, 32px)">
+<div class="dots-sm"></div>
+<div style="position: relative; max-width: 1240px; margin: 0 auto; padding: clamp(64px, 9vw, 112px) clamp(16px, 4vw, 40px); box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px">
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #8EA8FF"><span style="width: 22px; height: 2px; background: #8EA8FF"></span>Jornadas e capacitações</p>
+<h2 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.03em">Trilhas que viram <em style="font-style: italic; color: #8EA8FF">prática.</em></h2>
+</div>
+<div role="tablist" aria-label="Jornadas" style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px">
+<sc-for list="{{jornadas}}" as="j" hint-placeholder-count="3">
+<button type="button" role="tab" aria-selected="{{j.ativa}}" onClick="{{j.escolher}}" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.35); background: {{j.fundo}}; color: {{j.cor}}; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15px; cursor: pointer">{{j.nome}}</button>
+</sc-for>
+</div>
+<div role="tabpanel" style="display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch">
+<div style="flex: 999 1 520px; min-width: 0; border-radius: 26px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12); padding: clamp(24px, 3.5vw, 40px); box-sizing: border-box; display: flex; flex-direction: column; gap: 22px">
+<span style="align-self: flex-start; padding: 5px 12px; border-radius: 999px; background: #2B4BFF; font-size: 13px; font-weight: 700">{{jor.selo}}</span>
+<h3 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -0.02em">{{jor.nome}}</h3>
+<p style="margin: 0; font-size: 17px; color: #C9D3FF; max-width: 620px">{{jor.texto}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{jor.temas}}" as="t" hint-placeholder-count="3">
+<span style="padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.25); font-size: 14px; font-weight: 600">{{t}}</span>
+</sc-for>
+</div>
+</div>
+<ol style="flex: 1 1 320px; min-width: 0; margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{jor.etapas}}" as="e" hint-placeholder-count="3">
+<li style="flex: 1 1 auto; display: flex; align-items: center; gap: 16px; padding: 18px 20px; border-radius: 20px; background: #1B1150">
+<span style="flex: none; width: 44px; height: 44px; border-radius: 50%; background: #FFFFFF; color: #1B1150; display: flex; align-items: center; justify-content: center; font-stretch: 112%; font-weight: 800; font-size: 17px">{{e.n}}</span>
+<span style="display: flex; flex-direction: column; line-height: 1.3"><span style="font-weight: 700; font-size: 17px">{{e.titulo}}</span><span style="font-size: 14px; color: #B8C2EC">{{e.quando}}</span></span>
+</li>
+</sc-for>
+</ol>
+</div>
+</div>
+</section>
+
+<section id="agenda" style="max-width: 1240px; margin: 0 auto; padding: clamp(72px, 10vw, 120px) clamp(16px, 4vw, 40px); box-sizing: border-box; display: flex; flex-wrap: wrap; gap: 40px 64px">
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #1F4FD1"><span style="width: 22px; height: 2px; background: #1F4FD1"></span>Feiras e missões</p>
+<h2 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.03em">{{tituloAgenda.0}} <em style="font-style: italic; color: #1F4FD1">se mostra.</em></h2>
+<sc-if value="{{temMissoes}}"><div style="margin-top: 12px; border-radius: 24px; background: #1B1150; color: #FFFFFF; padding: 24px; display: flex; flex-direction: column; gap: 12px">
+<span style="font-size: 14px; font-weight: 700; color: #8EA8FF">Missões empresariais</span>
+<sc-for list="{{missoes}}" as="mi"><span style="font-stretch: 112%; font-weight: 700; font-size: 19px">{{mi}}</span></sc-for>
+<span style="font-size: 14px; color: #C9D3FF">Com apoio do Sebraetec antes e depois da viagem.</span>
+</div></sc-if>
+</div>
+<div style="flex: 999 1 560px; min-width: 0; border-top: 2px solid #0A0F2C">
+<sc-for list="{{feiras}}" as="f" hint-placeholder-count="7">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; padding: 20px 0; border-bottom: 1px solid #D8D2C6; opacity: {{f.opacidade}}">
+<span style="flex: 0 0 140px; font-stretch: 112%; font-weight: 800; font-size: 22px; letter-spacing: -0.01em; color: #1F4FD1">{{f.data}}</span>
+<span style="flex: 1 1 200px; font-stretch: 112%; font-weight: 700; font-size: 22px">{{f.nome}}</span>
+<span style="flex: 0 0 auto; padding: 5px 12px; border-radius: 999px; background: {{f.seloFundo}}; color: {{f.seloCor}}; font-size: 13px; font-weight: 700">{{f.status}}</span>
+</div>
+</sc-for>
+<p style="margin: 14px 0 0; font-size: 14px; color: #555A75">Datas podem ser atualizadas pela gestão do setor.</p>
+</div>
+</section>
+
+<section id="consultorias" style="background: #FFFFFF; border-top: 1px solid #E4E1D8; border-bottom: 1px solid #E4E1D8">
+<div style="max-width: 1240px; margin: 0 auto; padding: clamp(72px, 10vw, 120px) clamp(16px, 4vw, 40px); box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 40px; margin-bottom: 32px">
+<div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #1F4FD1"><span style="width: 22px; height: 2px; background: #1F4FD1"></span>Consultorias Sebraetec</p>
+<h2 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.03em">Soluções para <em style="font-style: italic; color: #1F4FD1">dentro da empresa.</em></h2>
+</div>
+<div role="tablist" aria-label="Frentes de consultoria" style="display: inline-flex; padding: 5px; border-radius: 999px; background: #F3EFE7">
+<sc-for list="{{frentes}}" as="fr" hint-placeholder-count="2">
+<button type="button" role="tab" aria-selected="{{fr.ativa}}" onClick="{{fr.escolher}}" style="min-height: 44px; padding: 0 18px; border-radius: 999px; border: none; background: {{fr.fundo}}; color: {{fr.cor}}; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 14px; cursor: pointer">{{fr.nome}}</button>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<img data-dc-src="{{imgFrente}}" alt="{{altFrente}}" style="flex: 1 1 340px; min-width: 0; height: 360px; object-fit: cover; border-radius: 26px">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<sc-for list="{{consultorias}}" as="c" hint-placeholder-count="3">
+<div style="flex: 1 1 auto; display: flex; align-items: center; gap: 20px; padding: 22px 24px; border-radius: 22px; background: #F3EFE7">
+<span style="flex: none; font-stretch: 112%; font-weight: 800; font-size: 32px; color: #1F4FD1; width: 56px">{{c.num}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px"><span style="font-stretch: 112%; font-weight: 700; font-size: 22px; line-height: 1.15">{{c.nome}}</span><span style="font-size: 15px; color: #555A75">{{c.texto}}</span></span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section aria-label="Case do setor" style="padding: clamp(72px, 10vw, 120px) 0 0">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); box-sizing: border-box">
+<div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px">
+<p style="margin: 0; display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: #1F4FD1"><span style="width: 22px; height: 2px; background: #1F4FD1"></span>Case do setor</p>
+<h2 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(36px, 4.6vw, 60px); line-height: 1.02; letter-spacing: -0.03em">{{tituloCase.0}} <em style="font-style: italic; color: #1F4FD1">cresceram aqui.</em></h2>
+</div>
+<article style="display: flex; flex-wrap: wrap; border-radius: 28px; overflow: hidden; background: #FFFFFF">
+<div style="flex: 1 1 400px; min-height: 360px; background: #E4E1D8; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: #555A75">{{caso.foto}}</div>
+<div style="flex: 999 1 460px; min-width: 0; padding: clamp(28px, 4vw, 52px); box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 18px">
+<span style="font-size: 14px; font-weight: 700; color: #555A75">{{caso.nome}}</span>
+<p style="margin: 0; font-stretch: 112%; font-weight: 600; font-size: clamp(22px, 2.3vw, 30px); line-height: 1.25">{{caso.texto}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; padding-top: 18px; border-top: 1px solid #E4E1D8">
+<div style="display: flex; flex-direction: column"><span style="font-stretch: 112%; font-weight: 800; font-size: 32px">{{caso.numero}}</span><span style="font-size: 14px; color: #555A75">{{caso.numeroRotulo}}</span></div>
+<div style="display: flex; flex-direction: column"><span style="font-stretch: 112%; font-weight: 800; font-size: 32px">{{caso.feira}}</span><span style="font-size: 14px; color: #555A75">{{caso.feiraRotulo}}</span></div>
+</div>
+</div>
+</article>
+</div>
+<div class="faixa" aria-label="Marcas atendidas" style="margin-top: 48px; overflow: hidden; border-top: 1px solid #DCD7CC; border-bottom: 1px solid #DCD7CC; background: #FFFFFF; padding: 22px 0">
+<div class="marquee-lento">
+<sc-for list="{{logosDuplo}}" as="l" hint-placeholder-count="16">
+<span style="flex: none; width: 170px; height: 64px; margin-right: 20px; border-radius: 14px; background: #F3EFE7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #555A75">{{l}}</span>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="contato" style="padding: clamp(72px, 10vw, 120px) clamp(16px, 4vw, 40px) 0; position: relative; z-index: 2; margin-bottom: -140px">
+<div style="position: relative; overflow: hidden; max-width: 1160px; margin: 0 auto; border-radius: 32px; background: #2B4BFF; color: #FFFFFF; padding: clamp(40px, 6vw, 64px) clamp(24px, 5vw, 64px); box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; gap: 32px 48px">
+<div class="dots" style="opacity: 0.8"></div>
+<div style="position: relative; flex: 999 1 460px; min-width: 0; display: flex; align-items: center; gap: 24px; flex-wrap: wrap">
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 8px">
+<h2 style="margin: 0; font-stretch: 112%; font-weight: 800; font-size: clamp(32px, 4vw, 52px); line-height: 1; letter-spacing: -0.03em">{{tituloContato.0}} <em style="font-style: italic">{{tituloContato.1}}</em></h2>
+<p style="margin: 0; font-size: 17px; color: #E3E8FF">Fale com a equipe da UDS e descubra por onde começar.</p>
+</div>
+</div>
+<div style="position: relative; flex: 1 1 260px; display: flex; flex-direction: column; gap: 12px">
+<a href="#contato" class="btn-claro" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; border-radius: 999px; background: #FFFFFF; color: #0A0F2C; text-decoration: none; font-weight: 700; font-size: 17px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"></path></svg>Chamar no WhatsApp</a>
+<a href="#contato" style="display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 58px; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.7); color: #FFFFFF; text-decoration: none; font-weight: 700; font-size: 17px; box-sizing: border-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>Enviar um e-mail</a>
+</div>
+</div>
+</section>
+
+<footer style="background: #0A0F2C; color: #B8C2EC; padding-top: 180px">
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); box-sizing: border-box; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px 48px">
+<div style="display: flex; align-items: center; gap: 12px"><img src="../assets/img/logo-sebrae-branca.png" alt="Sebrae" style="height: 32px; width: auto"><span style="width: 1px; height: 26px; background: rgba(255, 255, 255, 0.35)"></span><span style="font-stretch: 112%; font-weight: 800; font-size: 20px; color: #FFFFFF">UDS</span></div>
+<a href="../index.html#gestores" class="lk" style="display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; text-decoration: none">Ver outros setores</a>
+</div>
+<div style="max-width: 1240px; margin: 36px auto 0; padding: 20px clamp(16px, 4vw, 40px) 28px; box-sizing: border-box; border-top: 1px solid rgba(255, 255, 255, 0.12); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 14px">
+<span>Sebrae RN · Unidade de Desenvolvimento Setorial</span>
+<span>[Política de privacidade]</span>
+</div>
+</footer>
+
+</div>
+</template>
+<noscript><p style="padding:24px;color:#fff">Ative o JavaScript para ver esta página.</p></noscript>
+<script src="../dados/setores.js"></script>
+<script>var SLUG = "moda";</script>
+<script src="../assets/js/dc.js"></script>
+<script>
+class Component extends DCLogic {
+hoje() {
+const d = new Date(); const p = (n) => String(n).padStart(2, '0');
+return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+dataTexto(f) {
+if (!f.ini) return 'A definir';
+const M = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+const fim = f.fim || f.ini;
+const a = parseInt(f.ini.slice(8), 10), b = parseInt(fim.slice(8), 10);
+const m1 = M[parseInt(f.ini.slice(5, 7), 10) - 1], m2 = M[parseInt(fim.slice(5, 7), 10) - 1];
+if (f.ini === fim) return a + ' ' + m1;
+if (m1 !== m2) return a + ' ' + m1 + '–' + b + ' ' + m2;
+return a + '–' + b + ' ' + m1;
+}
+renderVals() {
+const s = window.SETORES[SLUG];
+const st = this.state || {};
+const hoje = this.hoje();
+const menuAberto = !!st.menu;
+const img = (c) => '../assets/' + c;
+const nomesNum = ['Uma', 'Duas', 'Três', 'Quatro', 'Cinco', 'Seis', 'Sete', 'Oito'];
+
+const cores = ['#1B1150', '#2B4BFF', '#0A0F2C', '#1F4FD1', '#1B1150', '#2B4BFF', '#0A0F2C', '#1F4FD1'];
+const programas = s.programas.map((p, i) => Object.assign({}, p, { num: String(i + 1).padStart(2, '0'), fundo: cores[i % cores.length] }));
+const pp = Math.min(st.prog || 0, Math.max(0, programas.length - 1));
+const maxProg = Math.max(0, programas.length - 1);
+
+const ji = st.jor || 0;
+const jornadas = s.jornadas.map((j, i) => ({ nome: j.nome, ativa: i === ji, fundo: i === ji ? '#FFFFFF' : 'transparent', cor: i === ji ? '#0A0F2C' : '#FFFFFF', escolher: () => this.setState({ jor: i }) }));
+
+let marcou = false;
+const ordenadas = s.feiras.filter((f) => f.ini).sort((a, b) => (a.ini < b.ini ? -1 : 1)).concat(s.feiras.filter((f) => !f.ini));
+const feiras = ordenadas.map((f) => {
+const fim = f.fim || f.ini;
+const enc = f.ini ? fim < hoje : false, agora = f.ini ? (!enc && f.ini <= hoje) : false;
+let prox = false; if (f.ini && !enc && !agora && !marcou) { prox = true; marcou = true; }
+const destaque = agora || prox;
+return { nome: f.nome, data: this.dataTexto(f), status: !f.ini ? 'Data a definir' : (agora ? 'Acontecendo' : (prox ? 'Próxima' : (enc ? 'Realizada' : 'Em breve'))), opacidade: enc ? '0.55' : '1', seloFundo: destaque ? '#2B4BFF' : '#E4E1D8', seloCor: destaque ? '#FFFFFF' : '#3A3F5C' };
+});
+if (!feiras.length) [1, 2, 3].forEach(() => feiras.push({ nome: '[Feira]', data: '[data]', status: '[status]', opacidade: '1', seloFundo: '#E4E1D8', seloCor: '#3A3F5C' }));
+
+const fi = Math.min(st.fr || 0, s.frentes.length - 1);
+const frentes = s.frentes.map((f, i) => ({ nome: f.nome, ativa: i === fi, fundo: i === fi ? '#0A0F2C' : 'transparent', cor: i === fi ? '#FFFFFF' : '#0A0F2C', escolher: () => this.setState({ fr: i }) }));
+let antes = 0; for (let i = 0; i < fi; i++) antes += s.frentes[i].itens.length;
+const consultorias = s.frentes[fi].itens.map((c, i) => Object.assign({}, c, { num: String(antes + i + 1).padStart(2, '0') }));
+const totalConsult = s.frentes.reduce((t, f) => t + f.itens.length, 0);
+
+const temDados = s.programas.length && s.programas[0].nome.charAt(0) !== '[';
+const logos = s.logos || ['[LOGO EMPRESA]', '[LOGO EMPRESA]', '[LOGO EMPRESA]', '[LOGO EMPRESA]', '[LOGO EMPRESA]', '[LOGO EMPRESA]', '[LOGO EMPRESA]', '[LOGO EMPRESA]'];
+const caso = Object.assign({ foto: '[FOTO DA EMPRESA OU DO PRODUTO]', nome: '[NOME DA EMPRESA] · [CIDADE]', texto: '"[Como a empresa chegou, o que fez com a UDS e o que mudou. Com autorização.]"', numero: '[+00%]', numeroRotulo: '[resultado medido]', feira: '[Feira]', feiraRotulo: '[de que participou]' }, s.caso || {});
+
+return {
+s: s,
+fotoGestor: img(s.gestor.foto || 'img/sem-retrato.svg'),
+bio: s.gestor.bio || '[Mini bio em duas linhas: formação, tempo no setor e o que mais gosta de resolver com as empresas.]',
+n0: temDados ? programas.length : '[0]', n1: temDados ? s.jornadas.length : '[0]',
+n2: (s.feiras.length + s.missoes.length) || '[0]', n3: temDados ? totalConsult : '[0]',
+tituloProg: s.tituloProgramas || (temDados ? [(nomesNum[programas.length - 1] || programas.length) + ' portas', 'de entrada.'] : ['[Portas de entrada', 'do setor.]']),
+tituloAgenda: s.tituloAgenda || ['Onde o setor', 'se mostra.'],
+tituloCase: s.tituloCase || ['Empresas que', 'cresceram aqui.'],
+tituloContato: s.tituloContato || ['Sua empresa cabe em', 'qual programa?'],
+missoes: s.missoes, temMissoes: s.missoes.length > 0,
+caso: caso,
+menuAberto: menuAberto, rotuloMenu: menuAberto ? 'Fechar' : 'Menu',
+alternarMenu: () => this.setState({ menu: !menuAberto }),
+fecharMenu: () => this.setState({ menu: false }),
+programas: programas, progDesloc: pp * 356,
+opProgAnt: pp <= 0 ? '0.35' : '1', opProgProx: pp >= maxProg ? '0.35' : '1',
+progAnterior: () => this.setState({ prog: Math.max(0, pp - 1) }),
+progProximo: () => this.setState({ prog: Math.min(maxProg, pp + 1) }),
+jornadas: jornadas, jor: s.jornadas[Math.min(ji, s.jornadas.length - 1)],
+feiras: feiras,
+frentes: frentes, consultorias: consultorias, imgFrente: img(s.frentes[fi].img), altFrente: s.frentes[fi].alt,
+logosDuplo: logos.concat(logos)
+};
+}
+}
+iniciarPagina(Component);
+</script>
+</body>
+</html>
